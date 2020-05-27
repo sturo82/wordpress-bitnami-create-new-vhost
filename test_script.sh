@@ -1,12 +1,12 @@
 #!/bin/bash
 
-while getopts d:n:db: option
+while getopts d:n:b: option
 do
 case "${option}"
 in
 d) DOMAIN=${OPTARG};;#senza il www
 n) APPNAME=${OPTARG};;
-db) DBNAME = ${OPTARG};;
+b) DBNAME = ${OPTARG};;
 esac
 done
 
