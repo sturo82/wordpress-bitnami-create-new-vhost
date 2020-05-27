@@ -173,15 +173,16 @@ dbrootusername='root'
 sudo cat /home/bitnami/bitnami_credentials
 echo "Type password of db [ENTER]:"
 read dbrootpassword
-mysql -u $dbrootusername -p
+#mysql -u $dbrootusername -p
 #Find bitnami credentials "sudo cat /home/bitnami/bitnami_credentials"
 vhostUser='vhusr_'$APPNAME
 vhostPassword='xDgTrfVu_'$APPNAME
 
-create user $vhostUser@'localhost' identified by $vhostPassword;
-create database $DBNAME;
-grant usage on *.* to $vhostUser@'localhost' identified by $vhostPassword;
-grant all privileges on $DBNAME.* to $vhostPassword@localhost;
+mysql --user="$dbrootusername" --password="$dbrootpassword" --execute="create user $vhostUser@'localhost' identified by $vhostPassword;"
+mysql --user="$dbrootusername" --password="$dbrootpassword" --execute="create database $DBNAME;"
+mysql --user="$dbrootusername" --password="$dbrootpassword" --execute="grant usage on *.* to $vhostUser@'localhost' identified by $vhostPassword;"
+mysql --user="$dbrootusername" --password="$dbrootpassword" --execute="grant all privileges on $DBNAME.* to $vhostPassword@localhost;"
+
 
 #test f db is correctly created
 #use dbname;
