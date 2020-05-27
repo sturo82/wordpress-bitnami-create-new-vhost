@@ -1,22 +1,30 @@
 #!/bin/bash
 
-while getopts db:d:n: option
-do
-case "${option}"
-in
-d) DOMAIN=${OPTARG};;#senza il www
-n) APPNAME=${OPTARG};;
-db) DBNAME = ${OPTARG};;
-esac
+while getopts ":d:n:b:" opt; do
+  case $opt in
+    d) DOMAIN="$OPTARG"
+    ;;
+    n) APPNAME="$OPTARG"
+    ;;
+    b) DBNAME="$OPTARG"
+    ;;
+    \?) echo "Invalid option -$OPTARG" >&2
+    ;;
+  esac
 done
 
-if [ ! -z "$DBNAME" ]
+if [ -z "$DBNAME" ]
   then
-    DBNAME = "$APPNAME"
+    echo "DBNAME is empty"
+    DBNAME=$APPNAME"_db"
 fi
-echo "DBNAME is set to $DBNAME"
 
-#Create fresh wp installation with copy of default bitnami vhost
+
+read -p "DBNAME is set to $DBNAME APPNAME is set to $APPNAME DOMAIN is set to $DOMAIN. Continue?(y/n)" -n 1 -r
+echo    # (optional) move to a new line
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    #Create fresh wp installation with copy of default bitnami vhost
 sudo mkdir -p /opt/bitnami/apps/$APPNAME && sudo rsync -av /opt/bitnami/apps/wordpress/ /opt/bitnami/apps/$APPNAME
 sudo rm -r /opt/bitnami/apps/$APPNAME/htdocs/*
 cd /opt/bitnami/apps/$APPNAME/htdocs/
@@ -180,3 +188,10 @@ echo "Include \"/opt/bitnami/apps/$APPNAME/conf/httpd-vhosts.conf\"" >>  /opt/bi
 #go to website and finish installation via browser
 
 sudo /opt/bitnami/ctlscript.sh restart apache
+else
+ echo "hai rifiutato"
+fi
+
+
+
+
