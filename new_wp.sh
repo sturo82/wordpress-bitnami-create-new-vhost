@@ -171,22 +171,20 @@ sudo /opt/bitnami/ctlscript.sh start
 #creare nuovo db 
 dbrootusername='root'
 sudo cat /home/bitnami/bitnami_credentials
-echo "Type password of db [ENTER]:"
-read dbrootpassword
+#echo "Type password of db [ENTER]:"
+#read dbrootpassword
+dbrootpassword='AMKCTq9m881w'
 #mysql -u $dbrootusername -p
 #Find bitnami credentials "sudo cat /home/bitnami/bitnami_credentials"
 vhostUser='vhusr_'$APPNAME
 vhostPassword='xDgTrfVu_'$APPNAME
 
-mysql --user="$dbrootusername" --password="$dbrootpassword" --execute="create user $vhostUser@'localhost' identified by $vhostPassword;"
+mysql --user="$dbrootusername" --password="$dbrootpassword" --execute="create user $vhostUser@'localhost' identified by '$vhostPassword';"
 mysql --user="$dbrootusername" --password="$dbrootpassword" --execute="create database $DBNAME;"
-mysql --user="$dbrootusername" --password="$dbrootpassword" --execute="grant usage on *.* to $vhostUser@'localhost' identified by $vhostPassword;"
-mysql --user="$dbrootusername" --password="$dbrootpassword" --execute="grant all privileges on $DBNAME.* to $vhostPassword@localhost;"
+mysql --user="$dbrootusername" --password="$dbrootpassword" --execute="grant usage on *.* to '$vhostUser'@'localhost';"
+mysql --user="$dbrootusername" --password="$dbrootpassword" --execute="grant all privileges on *.* to '$vhostUser'@'localhost';"
+mysql --user="$dbrootusername" --password="$dbrootpassword" --execute="FLUSH PRIVILEGES;"
 
-
-#test f db is correctly created
-#use dbname;
-exit;
 
 #abilitare vhost appena creato in /opt/bitnami/apache2/conf/bitnami/bitnami-apps-vhosts.conf
 echo "Include \"/opt/bitnami/apps/$APPNAME/conf/httpd-vhosts.conf\"" >>  /opt/bitnami/apache2/conf/bitnami/bitnami-apps-vhosts.conf
