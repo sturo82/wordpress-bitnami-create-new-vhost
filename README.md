@@ -3,8 +3,8 @@ scripts collection to manage Bitnami stack
 
 ## Script details
 
-> new_wp.sh
-create a new vhost
+### new_wp.sh
+> Rreate a new vhost. 
 
-> renew_cert_letsencrypt.sh
-renew a cert via letsencrypt
+### renew_cert_letsencrypt.sh
+> Renew a cert via letsencrypt.
