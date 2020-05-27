@@ -1,5 +1,5 @@
 #!/bin/bash
-
+<<COMMENT
 while getopts ":d:n:b:" opt; do
   case $opt in
     d) DOMAIN="$OPTARG"
@@ -18,7 +18,17 @@ if [ -z "$DBNAME" ]
     echo "DBNAME is empty"
     DBNAME=$APPNAME"_db"
 fi
+COMMENT
 
+read -p "Enter Your APPNAME: "  APPNAME
+read -p "Enter Your DOMAIN: "  DOMAIN
+read -p "Enter Your DBNAME: "  DBNAME
+
+if [  -z "$DBNAME" ] || [  -z "$DOMAIN" ] || [  -z "$APPNAME" ]
+  then
+    echo 'Parametri obbligatori mancanti'
+    ./$(basename $0) && exit
+fi
 
 read -p "DBNAME is set to $DBNAME APPNAME is set to $APPNAME DOMAIN is set to $DOMAIN. Continue?(y/n)" -n 1 -r
 echo    # (optional) move to a new line
@@ -199,7 +209,7 @@ sudo sed -i "/${line}/ s/# *//" $filename
 #to comment it out:
 #sed -i "/${line}/ s/^/# /" $filename 
 
-sudo /opt/bitnami/ctlscript.sh restart apache
+sudo /opt/bitnami/ctlscript.sh restart
 else
  echo "hai rifiutato"
 fi
