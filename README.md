@@ -1,5 +1,5 @@
-# scripts to manage bitnami stack
-> scripts collection to manage Bitnami stack
+# SCRIPTS TO MANAGE BITNAMI STACK
+*** scripts collection to manage Bitnami stack ***
 
 # Script details
 
