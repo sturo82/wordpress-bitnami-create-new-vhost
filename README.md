@@ -1,7 +1,7 @@
 # scripts to manage bitnami stack
-scripts collection to manage Bitnami stack
+> scripts collection to manage Bitnami stack
 
-## Script details
+# Script details
 
 ## new_wp.sh
 > Create a new vhost. 
