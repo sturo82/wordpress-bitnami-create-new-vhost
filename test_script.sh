@@ -12,7 +12,7 @@ done
 
 if [ ! -z "$DBNAME" ]
   then
-    DBNAME = "$APPNAME";;
+    DBNAME = $APPNAME
 fi
 echo "DBNAME is set to $DBNAME"
 echo "APPNAME is set to $APPNAME"
