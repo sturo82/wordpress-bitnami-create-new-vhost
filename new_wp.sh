@@ -169,19 +169,23 @@ sudo /opt/bitnami/letsencrypt/lego --tls --email="dev@endurancecloud.com" --doma
 sudo /opt/bitnami/ctlscript.sh start
 
 #creare nuovo db 
-<<COMMENT
-mysql -u <username> -p
-Find bitnami credentials "sudo cat /home/bitnami/bitnami_credentials"
+dbrootusername='root'
+sudo cat /home/bitnami/bitnami_credentials
+echo "Type password of db [ENTER]:"
+read dbrootpassword
+mysql -u $dbrootusername -p $dbrootpassword
+#Find bitnami credentials "sudo cat /home/bitnami/bitnami_credentials"
+vhostUser='vhusr_'$APPNAME
+vhostPassword='xDgTrfVu_'$APPNAME
 
-create user 'vhostuser'@'localhost' identified by 'vhostpassword';
-create database dbname;
-grant usage on *.* to vhostuser@localhost identified by 'vhostpassword';
-grant all privileges on dbname.* to vhostpassword@localhost;
+create user $vhostUser@'localhost' identified by $vhostPassword;
+create database $DBNAME;
+grant usage on *.* to $vhostUser@'localhost' identified by $vhostPassword;
+grant all privileges on $DBNAME.* to $vhostPassword@localhost;
 
 #test f db is correctly created
-use dbname;
+#use dbname;
 exit;
-COMMENT
 
 #abilitare vhost appena creato in /opt/bitnami/apache2/conf/bitnami/bitnami-apps-vhosts.conf
 echo "Include \"/opt/bitnami/apps/$APPNAME/conf/httpd-vhosts.conf\"" >>  /opt/bitnami/apache2/conf/bitnami/bitnami-apps-vhosts.conf
