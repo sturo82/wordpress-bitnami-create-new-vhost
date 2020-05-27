@@ -8,3 +8,8 @@ scripts collection to manage Bitnami stack
 
 ## renew_cert_letsencrypt.sh
 > Renew a cert via letsencrypt.
+
+2 info are required:
+- DOMAIN to renew
+- EMAIL contact
+
