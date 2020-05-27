@@ -187,6 +187,15 @@ COMMENT
 echo "Include \"/opt/bitnami/apps/$APPNAME/conf/httpd-vhosts.conf\"" >>  /opt/bitnami/apache2/conf/bitnami/bitnami-apps-vhosts.conf
 #go to website and finish installation via browser
 
+#uncomment on /opt/bitnami/apache2/conf/httpd.conf Include conf/extra/httpd-vhosts.conf
+line="Include conf\/extra\/httpd-vhosts.conf"
+filename="/opt/bitnami/apache2/conf/httpd.conf"
+#uncomment:
+sudo sed -i "/${line}/ s/# *//" $filename
+
+#to comment it out:
+#sed -i "/${line}/ s/^/# /" $filename 
+
 sudo /opt/bitnami/ctlscript.sh restart apache
 else
  echo "hai rifiutato"
