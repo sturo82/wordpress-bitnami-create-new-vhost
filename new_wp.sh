@@ -173,7 +173,7 @@ dbrootusername='root'
 sudo cat /home/bitnami/bitnami_credentials
 echo "Type password of db [ENTER]:"
 read dbrootpassword
-mysql -u $dbrootusername -p $dbrootpassword
+mysql -u $dbrootusername -p
 #Find bitnami credentials "sudo cat /home/bitnami/bitnami_credentials"
 vhostUser='vhusr_'$APPNAME
 vhostPassword='xDgTrfVu_'$APPNAME
