@@ -155,7 +155,10 @@ cat <<EOF >/opt/bitnami/apps/$APPNAME/conf/httpd-vhosts.conf
     ServerName $DOMAIN
     ServerAlias www.$DOMAIN
     DocumentRoot "/opt/bitnami/apps/$APPNAME/htdocs"
-
+    RewriteEngine On
+    RewriteCond %{HTTPS} !=on
+    RewriteCond %{HTTP_HOST} !^(localhost|127.0.0.1)
+    RewriteRule ^/(.*) https://%{SERVER_NAME}/$1 [R,L]
     Include "/opt/bitnami/apps/$APPNAME/conf/httpd-app.conf"
 </VirtualHost>
 
