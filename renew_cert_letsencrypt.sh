@@ -8,5 +8,5 @@ if [  -z "$DOMAIN" ] || [  -z "$EMAIL" ]
 fi
 
 sudo /opt/bitnami/ctlscript.sh stop
-sudo /opt/bitnami/letsencrypt/lego --tls --email="EMAIL" --domains="$DOMAIN" --path="/opt/bitnami/letsencrypt" run
+sudo /opt/bitnami/letsencrypt/lego --tls --email="$EMAIL" --domains="$DOMAIN" --path="/opt/bitnami/letsencrypt" run
 sudo /opt/bitnami/ctlscript.sh start
